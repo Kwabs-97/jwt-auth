@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5", // Set the target ECMAScript version (adjust if needed)
+    "module": "commonjs", // Module system (commonjs for Node.js)
+    "rootDir": "./src",
+    "strict": true, // Enable strict mode for type safety
+    "noImplicitAny": true, // Disallow implicit usage of the 'any' type
+    "esModuleInterop": true, // Enable compatibility with ES modules
+    "moduleResolution": "node",
+    "allowJs": true, // Allow compilation of JavaScript files
+    "outDir": "./dist", // Output directory for compiled JavaScript (optional)
+    "sourceMap": true, // Generate source maps for debugging
+    "forceConsistentCasingInFileNames": true, // Enforce consistent casing for file names
+    "typeRoots": ["./src/types"] // Path to your custom type definitions directory
+  }
+}
