@@ -23,7 +23,6 @@ app.use(cors());
 
 app.use(router);
 
-app.listen(8080, () => {
-  console.log(` listening on port ${process.env.PORT}`);
-  console.log(process.env.PORT);
+app.listen(`${process.env.PORT}`, () => {
+  console.log(`server is listening for requests`);
 });
