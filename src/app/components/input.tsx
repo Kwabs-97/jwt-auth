@@ -1,20 +1,20 @@
-import React from "react";
-interface InputProps {
-  type: string;
-  placeholder: string;
-  name: string;
-  className: string;
-}
+import * as React from "react";
 
-function Input({ type, className, placeholder, name }: InputProps) {
-  return (
-    <input
-      type={type}
-      className={`${className} py-2  `}
-      placeholder={placeholder}
-      name={name}
-    />
-  );
-}
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-export default Input;
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={`${className} px-3 py-3 outline-none border-none rounded-md bg-gray-300`}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Input.displayName = "Input";
+
+export { Input };

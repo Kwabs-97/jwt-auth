@@ -6,6 +6,6 @@ import verifyJWT from "../middleware/verifyJWT";
 const router = express.Router();
 
 router.post("/register", registerHandler);
-router.get("/login", loginHandler);
+router.post("/login", loginHandler);
 router.get("/protected", verifyJWT, protectedRoute);
 export default router;

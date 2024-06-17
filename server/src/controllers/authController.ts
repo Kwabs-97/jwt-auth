@@ -49,8 +49,7 @@ export const loginHandler = async (req: Request, res: Response) => {
     const user = await userDb.findOne({ email });
     if (!user)
       return res.status(401).json({
-        message:
-          "user with email does not exist. Please sign up to get started",
+        message: "account does not exist. Sign up instead",
       });
 
     //compare hashed passwords
@@ -83,7 +82,7 @@ export const loginHandler = async (req: Request, res: Response) => {
 
     //response message on successful login
     res.status(200).json({
-      message: "user has successfully logged in",
+      message: "login successful",
       data: {
         email: user.email,
         username: user.username,
