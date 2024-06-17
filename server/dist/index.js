@@ -14,16 +14,18 @@ var app = (0, express_1.default)();
 dotenv_1.default.config();
 (0, db_1.default)();
 //middlewares
+app.use((0, cors_1.default)({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.text());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
-app.use((0, cors_1.default)());
 //route
 app.use(authRoute_1.default);
-app.listen(8080, function () {
-    console.log(" listening on port ".concat(process.env.PORT));
-    console.log(process.env.PORT);
+app.listen("".concat(process.env.PORT), function () {
+    console.log("server is listening for requests");
 });
 //# sourceMappingURL=index.js.map

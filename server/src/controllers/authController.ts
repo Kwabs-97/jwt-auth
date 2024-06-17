@@ -62,10 +62,13 @@ export const loginHandler = async (req: Request, res: Response) => {
     //Generating JWT on successful login
     const payload = { userId: user.userId };
     const jwtSecretKey: any = process.env.JWT_SECRET_KEY;
+    const refreshTokenSecretKey: any = process.env.JWT_REFRESH_TOKEN_KEY;
     const token = jwt.sign(payload, jwtSecretKey, { expiresIn: "3600s" });
 
     //generate refresh token
-    const refreshToken = jwt.sign(payload, jwtSecretKey, { expiresIn: "7d" });
+    const refreshToken = jwt.sign(payload, refreshTokenSecretKey, {
+      expiresIn: "7d",
+    });
 
     //send the token to the client in a cookie
     res.cookie("auth-Token", token, {

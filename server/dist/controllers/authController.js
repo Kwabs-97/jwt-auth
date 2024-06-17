@@ -89,7 +89,7 @@ var registerHandler = function (req, res) { return __awaiter(void 0, void 0, voi
 }); };
 exports.registerHandler = registerHandler;
 var loginHandler = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, email, password, user, isMatch, payload, jwtSecretKey, token, refreshToken, error_2;
+    var _a, email, password, user, isMatch, payload, jwtSecretKey, refreshTokenSecretKey, token, refreshToken, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -102,7 +102,7 @@ var loginHandler = function (req, res) { return __awaiter(void 0, void 0, void 0
                 user = _b.sent();
                 if (!user)
                     return [2 /*return*/, res.status(401).json({
-                            message: "user with email does not exist. Please sign up to get started",
+                            message: "account does not exist. Sign up instead",
                         })];
                 return [4 /*yield*/, bcrypt_1.default.compare(password, user.passwordHash)];
             case 3:
@@ -113,8 +113,11 @@ var loginHandler = function (req, res) { return __awaiter(void 0, void 0, void 0
                             .json({ message: "invalid email or password. Please try again" })];
                 payload = { userId: user.userId };
                 jwtSecretKey = process.env.JWT_SECRET_KEY;
+                refreshTokenSecretKey = process.env.JWT_REFRESH_TOKEN_KEY;
                 token = jsonwebtoken_1.default.sign(payload, jwtSecretKey, { expiresIn: "3600s" });
-                refreshToken = jsonwebtoken_1.default.sign(payload, jwtSecretKey, { expiresIn: "7d" });
+                refreshToken = jsonwebtoken_1.default.sign(payload, refreshTokenSecretKey, {
+                    expiresIn: "7d",
+                });
                 //send the token to the client in a cookie
                 res.cookie("auth-Token", token, {
                     httpOnly: true,
@@ -127,7 +130,7 @@ var loginHandler = function (req, res) { return __awaiter(void 0, void 0, void 0
                 });
                 //response message on successful login
                 res.status(200).json({
-                    message: "user has successfully logged in",
+                    message: "login successful",
                     data: {
                         email: user.email,
                         username: user.username,

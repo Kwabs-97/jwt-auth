@@ -48,18 +48,15 @@ var verifyJWT = function (req, res, next) { return __awaiter(void 0, void 0, voi
         if (!authHeader || !authHeader.startsWith("Bearer"))
             return [2 /*return*/, res.status(401).json({ Message: "Unauthorized" })];
         token = authHeader.split(" ")[1];
-        try {
-            if (process.env.JWT_SECRET_KEY) {
+        if (process.env.JWT_SECRET_KEY) {
+            try {
                 decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET_KEY);
                 //add the decoded token to the request object
                 req.user = decoded;
             }
-            else {
-                throw new Error("Internal Server error");
+            catch (error) {
+                res.status(403).json({ Message: "Invalid token" });
             }
-        }
-        catch (error) {
-            res.status(403).json({ Message: "Invalid token" });
         }
         next();
         return [2 /*return*/];

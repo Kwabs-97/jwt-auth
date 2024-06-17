@@ -9,6 +9,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { FaGoogle, FaTwitter } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   //form types
@@ -25,9 +26,14 @@ export default function Home() {
   //handle error message state
   const [errorMessage, setErroMessage] = useState("");
 
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
     const response = await loginHandler(data);
-    if (response.status !== 200) {
+    console.log(response);
+    if (response.status === 200) {
+      router.push("/home");
+    } else {
       setErroMessage(response.data.message);
     }
   };

@@ -37,10 +37,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.protectedRoute = void 0;
+var certifiedLoverBoy_or_certifiedPedophile = {
+    name: "BBL Drizzy",
+    gender: "male but female when he stands besides other women",
+    genre: "scam artist",
+    offense: "acting tough",
+};
 var protectedRoute = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        res.send("<h2>You have successfully implemented jwt</h2>");
-        return [2 /*return*/];
+        return [2 /*return*/, res.status(200).json({
+                message: "You finally made it here",
+            })];
     });
 }); };
 exports.protectedRoute = protectedRoute;
